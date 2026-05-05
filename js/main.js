@@ -22,14 +22,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(this.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      const offset = 72; // nav height
+      const offset = 72;
       const top = target.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: 'smooth' });
     }
   });
 });
 
-// Lazy reveal animation on scroll
+// Lazy reveal animation — EXCLUDES hero slides so they don't conflict
 const revealEls = document.querySelectorAll('.amenity-card, .ideal-card, .gallery-item, .highlight');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -48,23 +48,40 @@ revealEls.forEach(el => {
   observer.observe(el);
 });
 
-
 // =====================
 // HERO SLIDESHOW
 // =====================
 (function() {
   const slides = document.querySelectorAll('.hero-slide');
   if (!slides.length) return;
+
   let current = 0;
 
+  // Make sure all slides start hidden via inline style (belt + suspenders)
+  slides.forEach((s, i) => {
+    s.style.transition = 'opacity 0.9s ease-in-out';
+    s.style.opacity = '0';
+    s.classList.remove('active');
+  });
+
+  // Show first slide immediately
+  slides[0].style.opacity = '1';
+  slides[0].classList.add('active');
+
   function nextSlide() {
+    // Fade out current
+    slides[current].style.opacity = '0';
     slides[current].classList.remove('active');
+
+    // Advance index
     current = (current + 1) % slides.length;
+
+    // Fade in next
+    slides[current].style.opacity = '1';
     slides[current].classList.add('active');
   }
 
-  // Start first slide
-  slides[0].classList.add('active');
+  // Cycle every 2 seconds
   setInterval(nextSlide, 2000);
 })();
 
@@ -77,13 +94,12 @@ revealEls.forEach(el => {
     const src = card.getAttribute('data-photo');
     const alt = card.querySelector('h3') ? card.querySelector('h3').textContent : '';
 
-    // Inject preview element
     const preview = document.createElement('div');
     preview.className = 'amenity-preview';
-    preview.innerHTML = \`<img src="\${src}" alt="\${alt}" loading="lazy" /><div class="amenity-preview-overlay"></div>\`;
+    preview.innerHTML = `<img src="${src}" alt="${alt}" loading="lazy" /><div class="amenity-preview-overlay"></div>`;
     card.insertBefore(preview, card.firstChild);
 
-    // Touch support
+    // Touch support for mobile
     card.addEventListener('touchstart', () => {
       card.classList.toggle('preview-active');
     }, { passive: true });
