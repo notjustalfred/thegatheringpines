@@ -224,7 +224,7 @@ ul { list-style: none; }
   object-fit: cover;
   object-position: center;
   opacity: 0;
-  transition: opacity 1.5s ease-in-out;
+  transition: opacity 0.8s ease-in-out;
 }
 .hero-slide.active { opacity: 1; }
 .hero-overlay {
@@ -245,6 +245,10 @@ ul { list-style: none; }
   margin: 0 auto;
   padding: 0 24px;
   padding-top: 72px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .hero-eyebrow {
   font-size: 12px;
