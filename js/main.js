@@ -65,7 +65,7 @@ revealEls.forEach(el => {
 
   // Start first slide
   slides[0].classList.add('active');
-  setInterval(nextSlide, 4500);
+  setInterval(nextSlide, 2000);
 })();
 
 // =====================
