@@ -211,13 +211,22 @@ ul { list-style: none; }
   align-items: center;
   overflow: hidden;
 }
-.hero-bg {
+/* Hero slideshow */
+.hero-slides {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+}
+.hero-slide {
   position: absolute;
   inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
 }
+.hero-slide.active { opacity: 1; }
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -384,6 +393,34 @@ ul { list-style: none; }
   margin-bottom: 8px;
 }
 .amenity-card p { font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.6; }
+
+/* Amenity photo preview */
+.amenity-card { position: relative; cursor: pointer; }
+.amenity-preview {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.amenity-preview img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.amenity-preview-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10,20,10,0.55);
+}
+.amenity-card:hover .amenity-preview,
+.amenity-card.preview-active .amenity-preview { opacity: 1; }
+.amenity-card h3,
+.amenity-card p,
+.amenity-icon { position: relative; z-index: 1; }
 
 /* =====================
    GALLERY
