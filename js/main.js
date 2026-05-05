@@ -47,3 +47,45 @@ revealEls.forEach(el => {
   el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
   observer.observe(el);
 });
+
+
+// =====================
+// HERO SLIDESHOW
+// =====================
+(function() {
+  const slides = document.querySelectorAll('.hero-slide');
+  if (!slides.length) return;
+  let current = 0;
+
+  function nextSlide() {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }
+
+  // Start first slide
+  slides[0].classList.add('active');
+  setInterval(nextSlide, 4500);
+})();
+
+// =====================
+// AMENITY PHOTO PREVIEW
+// =====================
+(function() {
+  const cards = document.querySelectorAll('.amenity-card[data-photo]');
+  cards.forEach(card => {
+    const src = card.getAttribute('data-photo');
+    const alt = card.querySelector('h3') ? card.querySelector('h3').textContent : '';
+
+    // Inject preview element
+    const preview = document.createElement('div');
+    preview.className = 'amenity-preview';
+    preview.innerHTML = \`<img src="\${src}" alt="\${alt}" loading="lazy" /><div class="amenity-preview-overlay"></div>\`;
+    card.insertBefore(preview, card.firstChild);
+
+    // Touch support
+    card.addEventListener('touchstart', () => {
+      card.classList.toggle('preview-active');
+    }, { passive: true });
+  });
+})();
