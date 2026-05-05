@@ -209,6 +209,7 @@ ul { list-style: none; }
   min-height: 600px;
   display: flex;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 /* Hero slideshow */
@@ -241,8 +242,8 @@ ul { list-style: none; }
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
   padding: 0 24px;
   padding-top: 72px;
   text-align: center;
@@ -277,11 +278,13 @@ ul { list-style: none; }
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: 56px;
 }
 .hero-stats {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 24px;
   flex-wrap: wrap;
 }
