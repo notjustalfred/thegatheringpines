@@ -535,6 +535,15 @@ ul { list-style: none; }
   max-width: 680px;
   margin: 0 auto;
 }
+.book-widget {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 32px;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+}
 .book-sub {
   color: rgba(255,255,255,0.7);
   font-size: 1rem;
